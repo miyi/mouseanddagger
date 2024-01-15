@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        [dg-cloak] {
+            display: none !important;
+        }
+
+        #div {
+        cursor: move;
+          position: absolute;
+          z-index: 9;
+          background-color: #f1f1f1;
+          text-align: center;
+          border: 1px solid #d3d3d3;
+        }
+    </style><!-- cloak style -->
+    <script type="module" crossorigin="anonymous" src="dagger/dagger.js" defer></script>
+    <script type="./modules">{
+        js: "./index.js"
+    }</script>
+
+    <title>Drag</title>
+</head>
+
+<body>
+    <div id="div">
+      move me
+    </div>
+    <!-- <script>dragElement(document.getElementById('div'))</script> -->
+</body>
+</html>
