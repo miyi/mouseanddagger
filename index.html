@@ -36,19 +36,24 @@
     <div $text="m0"></div>
     <div>m1</div>
     <div $text="m1"></div>
-    <div
-      class="container"
-      +mousemove="m1.x=$event.x, m1.y=$event.y"
-      $watch#1="dragging===true?div_x=m1.x-m0.x:null"
-      $watch#2="dragging===true?div_y=m1.y-m0.y:null"
-    >
+    <div class="row">
       <div
-        id="drag_div"
-        +mousedown="dragging=true, m0.x=$event.x, m0.y=$event.y"
-        +mouseup="dragging=false"
-        $style="['left:'+div_x,'top:'+div_y]"
+        class="container"
+        +mousemove="m1.x=$event.x, m1.y=$event.y"
+        $watch#1="dragging===true?div_x+=m1.x-m0.x:null"
+        $watch#2="dragging===true?div_y+=m1.y-m0.y:
       >
-        drag me
+        <div
+          id="drag_div"
+          +mousedown="dragging=true, m0.x=$event.x, m0.y=$event.y"
+          +mouseup="dragging=false"
+          $style="['left:'+div_x,'top:'+div_y]"
+        >
+          drag me
+        </div>
+      </div>
+      <div class="container">
+        <div id="drag_div">drag me</div>
       </div>
     </div>
   </body>
