@@ -1,41 +1,50 @@
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        [dg-cloak] {
-            display: none !important;
-        }
-
-        #drag_div {
-            cursor: move;
-            position: absolute;
-            z-index: 9;
-            background-color: #f1f1f1;
-            text-align: center;
-            border: 1px solid #d3d3d3;
-        }
-    </style><!-- cloak style -->
-    <script type="module" crossorigin="anonymous" src="js/dagger.js" defer></script>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script
+      type="module"
+      crossorigin="anonymous"
+      src="js/dagger.js"
+      defer
+    ></script>
+    <link rel="stylesheet" href="/index.css" />
     <script type="dagger/modules">
-        {
-          "js": "/index.js"
-        }
+      {
+        js: "/index.js",
+        hello: "/hello.html",
+      }
     </script>
     <title>dagger demo page</title>
-</head>
-
-<body>
-
-<div>
-    <div id="drag_div" +loading="drag_div(document.getElementById('drag_div'))">
+  </head>
+  <!-- div_pos = mouse_1 - mouse_0 -->
+  <body
+    +loading="{
+      div_x: 0,
+      div_y: 0,
+      m0: {x: null, y:null},
+      m1: {x: null, y:null},
+      dragging: false
+    }"
+  >
+    <hello></hello>
+    <div></div>
+    <div $text="m1"></div>
+    <div
+      class="container"
+      +mousemove="m1.x=$event.x, m1.y=$event.y"
+      $watch#1="dragging===true?div_x=m1.x-m0.x:null"
+      $watch#2="dragging===true?div_y=m1.y+m0.y:null"
+    >
+      <div
+        id="drag_div"
+        +mousedown="dragging=true, m0.x=$event.x, m0.y=$event.y"
+        +mouseup="dragging=false"
+        $style="['left:'+div_x,'top:'+div_y]"
+      >
         drag me
+      </div>
     </div>
-
-</div>
-
-</body>
-
+  </body>
 </html>
