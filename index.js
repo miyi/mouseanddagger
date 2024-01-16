@@ -1,26 +1,16 @@
-export const mousedown = ({pos, node, ...$scope}, e) => {
-  console.log('1');
- $scope.isDragging=true;
- pos.x = e.clientX - node.getBoundingClientRect().left;
- pos.y = e.clientY - node.getBoundingClientRect().top;
-}
-
-export const mousemove = ({pos, isDragging}, e) => {
-  if (isDragging) {
-    pos.x = e.clientX - pos.x;
-    pos.y = e.clientY - pos.y;
-    console.log(pos.x + '  ' + pos.y);
+export const movediv = (m1, $scope) => {
+  if ($scope.dragging === true) {
+    $scope.div.x += m1.x - $scope.m0.x;
+    $scope.div.y += m1.y - $scope.m0.y;
+    $scope.m0.x = m1.x;
+    $scope.m0.y = m1.y;
   }
-}
-
-export const mouseup = ($scope) => {
-  $scope.isDragging = false;
-}
+};
 
 // export function drag_div(elmnt) {
 //   eventHandler(elmnt);
 // }
-// 
+//
 // const eventHandler = (elmnt) => {
 //   var isDragging = false;
 //   var offsetX = null;

@@ -22,19 +22,19 @@
   <!-- div_pos = mouse_1 - mouse_0 -->
   <body
     +loading="{
-      div_x: 0,
-      div_y: 0,
+      div: {x: 0, y: 0},
       m0: {x: null, y:null},
       m1: {x: null, y:null},
       delta: {x: null, y: null},
-      dragging: false
+      dragging: false,
     }"
     $watch#1="delta.x=m1.x-m0.x"
     $watch#2="delta.y=m1.y-m0.y"
   >
     <hello></hello>
-    <div>div position</div>
-    <div>x: ${div_x}, y: ${div_y}</div>
+    <div +loading="{a: 0, b: 0}">
+      <button>
+    </div>
     <div>m0</div>
     <div $text="m0"></div>
     <div>m1</div>
@@ -45,21 +45,20 @@
       <div
         class="container"
         +mousemove="m1.x=$event.x, m1.y=$event.y"
-        $watch#1="dragging===true?div_x+=m1.x-m0.x:null"
-        $watch#2="dragging===true?div_y+=m1.y-m0.y:null"
+        +mouseup="dragging=false"
+        $watch="dragging===true?movediv(m1, $scope):null"
       >
         <div
           id="drag_div"
           +mousedown="dragging=true, m0.x=$event.x, m0.y=$event.y"
-          +mouseup="dragging=false"
-          $style="['left:'+div_x,'top:'+div_y]"
+          $style="['left:'+div.x,'top:'+div.y]"
         >
           drag me
         </div>
       </div>
-      <div class="container">
+      <!-- <div class="container">
         <div id="drag_div">drag me</div>
-      </div>
+      </div> -->
     </div>
   </body>
 </html>
