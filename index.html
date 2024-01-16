@@ -26,8 +26,11 @@
       div_y: 0,
       m0: {x: null, y:null},
       m1: {x: null, y:null},
+      delta: {x: null, y: null},
       dragging: false
     }"
+    $watch#1="delta.x=m1.x-m0.x"
+    $watch#2="delta.y=m1.y-m0.y"
   >
     <hello></hello>
     <div>div position</div>
@@ -36,12 +39,14 @@
     <div $text="m0"></div>
     <div>m1</div>
     <div $text="m1"></div>
+    <div>delta</div>
+    <div $text="delta"></div>
     <div class="row">
       <div
         class="container"
         +mousemove="m1.x=$event.x, m1.y=$event.y"
         $watch#1="dragging===true?div_x+=m1.x-m0.x:null"
-        $watch#2="dragging===true?div_y+=m1.y-m0.y:
+        $watch#2="dragging===true?div_y+=m1.y-m0.y:null"
       >
         <div
           id="drag_div"
