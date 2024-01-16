@@ -1,11 +1,26 @@
-export const movediv = (m1, $scope) => {
+export const mousedown = ($scope, $event) => {
+  $scope.offset = $event.target.getBoundingClientRect();
+  console.log($scope.offset.left + " , " + $scope.offset.top);
+  $scope.dragging = true;
+};
+
+export const mousemove = ($scope, $event) => {
   if ($scope.dragging === true) {
-    $scope.div.x += m1.x - $scope.m0.x;
-    $scope.div.y += m1.y - $scope.m0.y;
-    $scope.m0.x = m1.x;
-    $scope.m0.y = m1.y;
+    $scope.div = {
+      x: $event.x - $scope.offset.left,
+      y: $event.y - $scope.offset.top,
+    };
   }
 };
+
+// export const watchMouse = (m1, $scope) => {
+//   if ($scope.dragging === true) {
+//     $scope.div.x += m1.x - $scope.m0.x;
+//     $scope.div.y += m1.y - $scope.m0.y;
+//     $scope.m0.x = m1.x;
+//     $scope.m0.y = m1.y;
+//   }
+// };
 
 // export function drag_div(elmnt) {
 //   eventHandler(elmnt);

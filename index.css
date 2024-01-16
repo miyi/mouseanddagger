@@ -14,6 +14,10 @@ body {
   height: 100vh;
 }
 
+.data {
+  height: 150px;
+}
+
 .row {
   width: 100%;
   display: flex;

@@ -23,34 +23,30 @@
   <body
     +loading="{
       div: {x: 0, y: 0},
-      m0: {x: null, y:null},
-      m1: {x: null, y:null},
-      delta: {x: null, y: null},
+      offset: null,
       dragging: false,
+      clientxy: {x: null, y: null}
     }"
-    $watch#1="delta.x=m1.x-m0.x"
-    $watch#2="delta.y=m1.y-m0.y"
   >
-    <hello></hello>
-    <div +loading="{a: 0, b: 0}">
-      <button>
+    <div class="data">
+      <div>div:</div>
+      <span $text="div"></span>
+      <div>offset:</div>
+      <span $text="offset"></span>
+      <div>dragging:</div>
+      <span $text="dragging"></span>
+      <div>clientxy:</div>
+      <span $text="clientxy"></span>
     </div>
-    <div>m0</div>
-    <div $text="m0"></div>
-    <div>m1</div>
-    <div $text="m1"></div>
-    <div>delta</div>
-    <div $text="delta"></div>
     <div class="row">
       <div
         class="container"
-        +mousemove="m1.x=$event.x, m1.y=$event.y"
-        +mouseup="dragging=false"
-        $watch="dragging===true?movediv(m1, $scope):null"
+        +mousemove="mousemove($scope, $event)"
+        +mouseup="dragging=false, offset=null"
       >
         <div
           id="drag_div"
-          +mousedown="dragging=true, m0.x=$event.x, m0.y=$event.y"
+          +mousedown="mousedown($scope, $event)"
           $style="['left:'+div.x,'top:'+div.y]"
         >
           drag me
