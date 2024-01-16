@@ -14,6 +14,7 @@
       {
         js: "/index.js",
         hello: "/hello.html",
+        css: "/index.css"
       }
     </script>
     <title>dagger demo page</title>
@@ -29,13 +30,17 @@
     }"
   >
     <hello></hello>
-    <div></div>
+    <div>div position</div>
+    <div>x: ${div_x}, y: ${div_y}</div>
+    <div>m0</div>
+    <div $text="m0"></div>
+    <div>m1</div>
     <div $text="m1"></div>
     <div
       class="container"
       +mousemove="m1.x=$event.x, m1.y=$event.y"
       $watch#1="dragging===true?div_x=m1.x-m0.x:null"
-      $watch#2="dragging===true?div_y=m1.y+m0.y:null"
+      $watch#2="dragging===true?div_y=m1.y-m0.y:null"
     >
       <div
         id="drag_div"
