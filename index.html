@@ -25,7 +25,7 @@
       div: {x: 0, y: 0},
       offset: null,
       dragging: false,
-      clientxy: {x: null, y: null}
+      container_offset: {x: null, y: null},
     }"
   >
     <div class="data">
@@ -35,12 +35,11 @@
       <span $text="offset"></span>
       <div>dragging:</div>
       <span $text="dragging"></span>
-      <div>clientxy:</div>
-      <span $text="clientxy"></span>
     </div>
     <div class="row">
       <div
         class="container"
+        +loaded="getContainerOffset($scope, $node)"
         +mousemove="mousemove($scope, $event)"
         +mouseup="dragging=false, offset=null"
       >
@@ -55,9 +54,6 @@
       <div class="container">
         <div id="drag_div">drag me</div>
       </div>
-    </div>
-    <div id="clickme">Click Me -<br>
-      (this box has margin-left: 100px; margin-top: 20px;)
     </div>
   </body>
 </html>

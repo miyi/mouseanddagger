@@ -1,8 +1,14 @@
+export const getContainerOffset = ($scope, $node) => {
+  const rect = $node.getBoundingClientRect();
+  $scope.container_offset.x = rect.left;
+  $scope.container_offset.y = rect.top;
+};
+
 export const mousedown = ($scope, $event) => {
   const rect = $event.target.getBoundingClientRect();
   $scope.offset = {
-    x: $event.clientX - rect.left,
-    y: $event.clientY - rect.top,
+    x: $event.x - rect.left,
+    y: $event.y - rect.top,
   };
   $scope.dragging = true;
 };
@@ -10,19 +16,10 @@ export const mousedown = ($scope, $event) => {
 export const mousemove = ($scope, $event) => {
   if ($scope.dragging === true) {
     $scope.div = {
-      x: $event.clientX - $scope.offset.x,
-      y: $event.clientY - $scope.offset.y,
+      x: $event.clientX - $scope.offset.x - $scope.container_offset.x,
+      y: $event.clientY - $scope.offset.y - $scope.container_offset.y,
     };
-  } else {
   }
-};
-
-document.getElementById("clickme").onclick = function (e) {
-  // e = Mouse click event.
-  var rect = e.target.getBoundingClientRect();
-  var x = e.clientX - rect.left; //x position within the element.
-  var y = e.clientY - rect.top; //y position within the element.
-  console.log("Left? : " + x + " ; Top? : " + y + ".");
 };
 // export const watchMouse = (m1, $scope) => {
 //   if ($scope.dragging === true) {
