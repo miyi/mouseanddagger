@@ -7,8 +7,8 @@ export const getContainerOffset = ($scope, $node) => {
 export const mousedown = ($scope, $event) => {
   const rect = $event.target.getBoundingClientRect();
   $scope.offset = {
-    x: $event.x - rect.left,
-    y: $event.y - rect.top,
+    x: $event.x - rect.left + $scope.container_offset.x,
+    y: $event.y - rect.top + $scope.container_offset.y,
   };
   $scope.dragging = true;
 };
@@ -16,8 +16,8 @@ export const mousedown = ($scope, $event) => {
 export const mousemove = ($scope, $event) => {
   if ($scope.dragging === true) {
     $scope.div = {
-      x: $event.clientX - $scope.offset.x - $scope.container_offset.x,
-      y: $event.clientY - $scope.offset.y - $scope.container_offset.y,
+      x: $event.clientX - $scope.offset.x,
+      y: $event.clientY - $scope.offset.y,
     };
   }
 };
